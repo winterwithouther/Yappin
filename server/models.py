@@ -9,3 +9,8 @@ class Post(db.Model, SerializerMixin):
     content = db.Column(db.String)
     caption = db.Column(db.String)
 
+class User(db.Model, SerializerMixin):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String)
+
