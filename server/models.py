@@ -29,6 +29,11 @@ class Comment(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String)
 
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    serialize_rules = ("-post.comments", "-user.comments",)
+
 class Like(db.Model, SerializerMixin):
     __tablename__ = "likes"
     id = db.Column(db.Integer, primary_key=True)
