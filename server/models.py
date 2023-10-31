@@ -38,3 +38,8 @@ class Like(db.Model, SerializerMixin):
     __tablename__ = "likes"
     id = db.Column(db.Integer, primary_key=True)
 
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    serialize_rules = ("-post.likes", "-user.likes",)
+
