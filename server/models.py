@@ -19,6 +19,11 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
 
+    comments = db.relationship("Comment", backref="user", cascade="all")
+    likes = db.relationship("Like", backref="user", cascade="all, delete-orphan")
+
+    serialize_rules = ("-comments.user", "-likes.user",)
+
 class Comment(db.Model, SerializerMixin):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
